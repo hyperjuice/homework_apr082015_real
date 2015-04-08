@@ -17,7 +17,7 @@ In short, an HTTP API, is a black box that we make requests to, and get response
 To turn Reddit into a JSON API, we simply add `.json` to the end of a reddit url like so [http://www.reddit.com/new.json](http://www.reddit.com/new.json)
 
 ### Intro the Request module
-To get started clone this repo [HERE IS THE REPO](http://linktotherepo).
+To get started clone this repo [HERE IS THE REPO](https://github.com/sf-wdi-17/inclass_api).
 
 ```bash
 $ npm install --save request
