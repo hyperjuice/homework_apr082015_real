@@ -11,12 +11,28 @@ app.get('/', function(req,res) {
 
 // We have our search route that renders our search view
 app.get('/search', function(req,res) {
-  res.render('search', {movies: []});
+  var queryParams = req.query.q;
+  var url = "http://www.omdbapi.com?s="+queryParams;
+  request(url, function(err,resp,body){
+  	if (!err && resp.statusCode === 200) {
+  		var jsonData = JSON.parse(body);
+  		res.render('search', { movies: jsonData.Search});
+  	}
+  });
 });
 
 // We have our movie route that renders our movie view
 app.get('/movie', function(req,res) {
-  res.render('movie', {movie: {Title: "I'm a movie", Plot: "I'm a plot"}});
+	var imdbID = req.query.id;
+	var url = "http://www.omdbapi.com?i="+imdbID;
+	request(url, function(err,resp,body) {
+		if (!err && resp.statusCode === 200) {
+			var movieData = JSON.parse(body);
+			res.render('movie', {movie: movieData});
+		}
+	});
 });
 
-app.listen(3000);
+app.listen(3000, function() {
+  console.log('I am listening');
+});
